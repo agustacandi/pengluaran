@@ -12,6 +12,7 @@ interface PieChartData {
   value: number
   color: string
   percentage?: number
+  [key: string]: string | number | undefined
 }
 
 interface PieChartCardProps {
@@ -59,7 +60,8 @@ export function PieChartCard({
               outerRadius={80}
               fill="#8884d8"
               dataKey="value"
-              label={(entry) => {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              label={(entry: any) => {
                 const percentage = totalValue > 0 ? (entry.value / totalValue) * 100 : 0
                 return `${percentage.toFixed(0)}%`
               }}

@@ -31,7 +31,7 @@ export function formatCurrency(amount: number, currency: string = DEFAULT_CURREN
  * Format date to long format (1 Januari 2025)
  */
 export function formatDate(date: string | Date): string {
-  return new Intl.DateFormat('id-ID', {
+  return new Intl.DateTimeFormat('id-ID', {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
@@ -42,7 +42,7 @@ export function formatDate(date: string | Date): string {
  * Format date to short format (1 Jan)
  */
 export function formatShortDate(date: string | Date): string {
-  return new Intl.DateFormat('id-ID', {
+  return new Intl.DateTimeFormat('id-ID', {
     day: 'numeric',
     month: 'short',
   }).format(new Date(date))
@@ -63,6 +63,7 @@ export function formatCompactNumber(num: number): string {
 /**
  * Debounce function calls
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function debounce<T extends (...args: any[]) => any>(
   func: T,
   wait: number

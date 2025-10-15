@@ -38,8 +38,8 @@ export function useAuth(options?: UseAuthOptions) {
         options?.onSuccess?.('Berhasil masuk')
         router.push(ROUTES.DASHBOARD)
         router.refresh()
-      } catch (err: any) {
-        const errorMessage = err.message || 'Gagal masuk'
+      } catch (err: unknown) {
+        const errorMessage = err instanceof Error ? err.message : 'Gagal masuk'
         setError(errorMessage)
         options?.onError?.(errorMessage)
         throw err
@@ -73,8 +73,8 @@ export function useAuth(options?: UseAuthOptions) {
 
         options?.onSuccess?.('Akun berhasil dibuat')
         return true
-      } catch (err: any) {
-        const errorMessage = err.message || 'Gagal membuat akun'
+      } catch (err: unknown) {
+        const errorMessage = err instanceof Error ? err.message : 'Gagal membuat akun'
         setError(errorMessage)
         options?.onError?.(errorMessage)
         throw err
@@ -96,8 +96,8 @@ export function useAuth(options?: UseAuthOptions) {
       await supabase.auth.signOut()
       options?.onSuccess?.('Berhasil keluar')
       router.push(ROUTES.LOGIN)
-    } catch (err: any) {
-      const errorMessage = err.message || 'Gagal keluar'
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Gagal keluar'
       setError(errorMessage)
       options?.onError?.(errorMessage)
       throw err

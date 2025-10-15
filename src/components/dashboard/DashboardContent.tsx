@@ -8,16 +8,15 @@ import { Plus, TrendingUp, TrendingDown, Wallet, ArrowUpRight, ArrowDownRight } 
 import { formatCurrency, formatShortDate } from '@/lib/utils'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 import { TransactionModal } from '@/components/transactions/TransactionModal'
-import { format, startOfMonth, endOfMonth, eachDayOfInterval, parseISO } from 'date-fns'
+import { format, startOfMonth, endOfMonth, eachDayOfInterval } from 'date-fns'
 import { id } from 'date-fns/locale'
 
 interface DashboardContentProps {
   transactions: Transaction[]
   categories: Category[]
-  user: any
 }
 
-export function DashboardContent({ transactions: initialTransactions, categories, user }: DashboardContentProps) {
+export function DashboardContent({ transactions: initialTransactions, categories }: DashboardContentProps) {
   const [transactions, setTransactions] = useState(initialTransactions)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalType, setModalType] = useState<'income' | 'expense'>('expense')
@@ -180,7 +179,8 @@ export function DashboardContent({ transactions: initialTransactions, categories
                     cx="50%"
                     cy="50%"
                     labelLine={false}
-                    label={(entry) => `${entry.name}: ${((entry.value / totalExpense) * 100).toFixed(0)}%`}
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    label={(entry: any) => `${entry.name}: ${((entry.value / totalExpense) * 100).toFixed(0)}%`}
                     outerRadius={80}
                     fill="#8884d8"
                     dataKey="value"

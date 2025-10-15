@@ -10,7 +10,7 @@ import { CHART_COLORS } from '@/lib/constants'
 
 interface LineChartCardProps {
   title: string
-  data: any[]
+  data: Record<string, unknown>[]
   xAxisKey: string
   lines: {
     dataKey: string

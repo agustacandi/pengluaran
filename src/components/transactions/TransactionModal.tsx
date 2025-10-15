@@ -102,8 +102,8 @@ export function TransactionModal({
       onSuccess(result)
       reset()
       onClose()
-    } catch (error: any) {
-      setError(error.message)
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : 'Terjadi kesalahan')
     } finally {
       setLoading(false)
     }

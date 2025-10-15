@@ -4,7 +4,7 @@
  */
 
 // Re-export from existing utils
-export { cn, formatCurrency, formatDate, formatShortDate } from './utils'
+export { cn, formatCurrency, formatDate, formatShortDate } from '../utils'
 
 // Re-export date utilities
 export * from './date'

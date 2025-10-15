@@ -4,10 +4,10 @@ import { useState } from 'react'
 import { Transaction, Category } from '@/lib/types'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
-import { Download, Calendar, TrendingUp, TrendingDown } from 'lucide-react'
-import { formatCurrency, formatDate } from '@/lib/utils'
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
-import { format, parseISO, startOfMonth, endOfMonth, eachMonthOfInterval, subMonths } from 'date-fns'
+import { Download } from 'lucide-react'
+import { formatCurrency } from '@/lib/utils'
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
+import { format, startOfMonth, endOfMonth, eachMonthOfInterval, subMonths } from 'date-fns'
 import { id } from 'date-fns/locale'
 
 interface ReportsContentProps {
@@ -260,7 +260,8 @@ export function ReportsContent({ transactions, categories }: ReportsContentProps
                       outerRadius={80}
                       fill="#8884d8"
                       dataKey="value"
-                      label={(entry) => `${entry.percentage.toFixed(0)}%`}
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      label={(entry: any) => `${entry.percentage.toFixed(0)}%`}
                     >
                       {expenseByCategory.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={entry.color} />
@@ -309,7 +310,8 @@ export function ReportsContent({ transactions, categories }: ReportsContentProps
                       outerRadius={80}
                       fill="#8884d8"
                       dataKey="value"
-                      label={(entry) => `${entry.percentage.toFixed(0)}%`}
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      label={(entry: any) => `${entry.percentage.toFixed(0)}%`}
                     >
                       {incomeByCategory.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={entry.color} />

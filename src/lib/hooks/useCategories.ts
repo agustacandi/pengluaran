@@ -6,7 +6,7 @@
 import { useState, useCallback } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { createCategoryService } from '@/lib/services/categories.service'
-import { Category, TransactionType } from '@/lib/types'
+import { TransactionType } from '@/lib/types'
 
 interface UseCategoriesOptions {
   onSuccess?: (message: string) => void
@@ -39,8 +39,8 @@ export function useCategories(options?: UseCategoriesOptions) {
         const category = await service.create(user.id, data)
         options?.onSuccess?.('Kategori berhasil ditambahkan')
         return category
-      } catch (err: any) {
-        const errorMessage = err.message || 'Gagal menambahkan kategori'
+      } catch (err: unknown) {
+        const errorMessage = err instanceof Error ? err.message : 'Gagal menambahkan kategori'
         setError(errorMessage)
         options?.onError?.(errorMessage)
         throw err
@@ -71,8 +71,8 @@ export function useCategories(options?: UseCategoriesOptions) {
         const category = await service.update(categoryId, data)
         options?.onSuccess?.('Kategori berhasil diperbarui')
         return category
-      } catch (err: any) {
-        const errorMessage = err.message || 'Gagal memperbarui kategori'
+      } catch (err: unknown) {
+        const errorMessage = err instanceof Error ? err.message : 'Gagal memperbarui kategori'
         setError(errorMessage)
         options?.onError?.(errorMessage)
         throw err
@@ -94,8 +94,8 @@ export function useCategories(options?: UseCategoriesOptions) {
       try {
         await service.delete(categoryId)
         options?.onSuccess?.('Kategori berhasil dihapus')
-      } catch (err: any) {
-        const errorMessage = err.message || 'Gagal menghapus kategori'
+      } catch (err: unknown) {
+        const errorMessage = err instanceof Error ? err.message : 'Gagal menghapus kategori'
         setError(errorMessage)
         options?.onError?.(errorMessage)
         throw err

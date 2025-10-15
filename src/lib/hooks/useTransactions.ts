@@ -40,8 +40,8 @@ export function useTransactions(options?: UseTransactionsOptions) {
         const transaction = await service.create(user.id, data)
         options?.onSuccess?.('Transaksi berhasil ditambahkan')
         return transaction
-      } catch (err: any) {
-        const errorMessage = err.message || 'Gagal menambahkan transaksi'
+      } catch (err: unknown) {
+        const errorMessage = err instanceof Error ? err.message : 'Gagal menambahkan transaksi'
         setError(errorMessage)
         options?.onError?.(errorMessage)
         throw err
@@ -73,8 +73,8 @@ export function useTransactions(options?: UseTransactionsOptions) {
         const transaction = await service.update(transactionId, data)
         options?.onSuccess?.('Transaksi berhasil diperbarui')
         return transaction
-      } catch (err: any) {
-        const errorMessage = err.message || 'Gagal memperbarui transaksi'
+      } catch (err: unknown) {
+        const errorMessage = err instanceof Error ? err.message : 'Gagal memperbarui transaksi'
         setError(errorMessage)
         options?.onError?.(errorMessage)
         throw err
@@ -96,8 +96,8 @@ export function useTransactions(options?: UseTransactionsOptions) {
       try {
         await service.delete(transactionId)
         options?.onSuccess?.('Transaksi berhasil dihapus')
-      } catch (err: any) {
-        const errorMessage = err.message || 'Gagal menghapus transaksi'
+      } catch (err: unknown) {
+        const errorMessage = err instanceof Error ? err.message : 'Gagal menghapus transaksi'
         setError(errorMessage)
         options?.onError?.(errorMessage)
         throw err

@@ -47,8 +47,8 @@ export function TransactionsContent({ transactions: initialTransactions, categor
       if (error) throw error
 
       setTransactions(prev => prev.filter(t => t.id !== id))
-    } catch (error: any) {
-      alert('Error: ' + error.message)
+    } catch (error: unknown) {
+      alert('Error: ' + (error instanceof Error ? error.message : 'Terjadi kesalahan'))
     }
   }
 
@@ -148,7 +148,7 @@ export function TransactionsContent({ transactions: initialTransactions, categor
             </label>
             <select
               value={filterType}
-              onChange={(e) => setFilterType(e.target.value as any)}
+              onChange={(e) => setFilterType(e.target.value as 'all' | TransactionType)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
             >
               <option value="all">Semua Tipe</option>

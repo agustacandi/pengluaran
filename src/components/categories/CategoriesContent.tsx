@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Category, TransactionType } from '@/lib/types'
+import { Category } from '@/lib/types'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { Plus, Edit2, Trash2, TrendingUp, TrendingDown } from 'lucide-react'
@@ -41,8 +41,8 @@ export function CategoriesContent({ categories: initialCategories }: CategoriesC
       if (error) throw error
 
       setCategories(prev => prev.filter(c => c.id !== id))
-    } catch (error: any) {
-      alert('Error: ' + error.message)
+    } catch (error: unknown) {
+      alert('Error: ' + (error instanceof Error ? error.message : 'Terjadi kesalahan'))
     }
   }
 
@@ -63,6 +63,7 @@ export function CategoriesContent({ categories: initialCategories }: CategoriesC
 
   const getIcon = (iconName?: string) => {
     if (!iconName) return null
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const Icon = (Icons as any)[iconName]
     if (!Icon) return null
     return <Icon className="w-5 h-5" />

@@ -98,7 +98,7 @@ export class CategoryService {
   /**
    * Get category usage statistics
    */
-  async getUsageStats(categories: Category[], transactions: any[]) {
+  async getUsageStats(categories: Category[], transactions: { category_id?: string; amount: number }[]) {
     return categories.map(category => {
       const categoryTransactions = transactions.filter(
         t => t.category_id === category.id

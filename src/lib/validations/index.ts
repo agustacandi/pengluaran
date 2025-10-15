@@ -8,9 +8,7 @@ import { ERROR_MESSAGES } from '@/lib/constants'
 
 // Transaction validation schema
 export const transactionSchema = z.object({
-  type: z.enum(['income', 'expense'], {
-    required_error: ERROR_MESSAGES.REQUIRED_FIELD,
-  }),
+  type: z.enum(['income', 'expense']),
   amount: z.string()
     .min(1, ERROR_MESSAGES.REQUIRED_FIELD)
     .refine(
@@ -29,9 +27,7 @@ export const categorySchema = z.object({
   name: z.string()
     .min(1, ERROR_MESSAGES.REQUIRED_FIELD)
     .max(100, 'Nama kategori maksimal 100 karakter'),
-  type: z.enum(['income', 'expense'], {
-    required_error: ERROR_MESSAGES.REQUIRED_FIELD,
-  }),
+  type: z.enum(['income', 'expense']),
   icon: z.string().optional(),
   color: z.string().min(1, 'Warna harus dipilih'),
 })

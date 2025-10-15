@@ -8,7 +8,7 @@ import { Modal } from '@/components/ui/Modal'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { createClient } from '@/lib/supabase/client'
-import { Category, TransactionType } from '@/lib/types'
+import { Category } from '@/lib/types'
 
 const categorySchema = z.object({
   name: z.string().min(1, 'Nama kategori harus diisi'),
@@ -105,8 +105,8 @@ export function CategoryModal({ isOpen, onClose, category, onSuccess }: Category
       onSuccess(result)
       reset()
       onClose()
-    } catch (error: any) {
-      setError(error.message)
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : 'Terjadi kesalahan')
     } finally {
       setLoading(false)
     }

@@ -35,7 +35,6 @@ export default async function DashboardPage() {
       <DashboardContent
         transactions={transactions || []}
         categories={categories || []}
-        user={user}
       />
     </DashboardLayout>
   )

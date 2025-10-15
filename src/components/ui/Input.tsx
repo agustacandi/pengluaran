@@ -34,7 +34,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
 Input.displayName = 'Input'
 
-interface TextAreaProps extends InputHTMLAttributes<HTMLTextAreaElement> {
+interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string
   error?: string
 }
@@ -55,7 +55,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
             error && 'border-red-500 focus:ring-red-500',
             className
           )}
-          {...props as any}
+          {...(props as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
         />
         {error && (
           <p className="mt-1 text-sm text-red-600">{error}</p>
